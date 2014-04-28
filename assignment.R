@@ -75,7 +75,7 @@ readActivity <-function(rootPath="./UCI HAR Dataset/"){
   activityL <- read.table(labelFileName, col.names=c("Seq","Activity"))
 }
 
-changeActivityToWords <- function(data, activityLables){
+changeActivityToWords <- function(data, activityLabels){
   actCol <- which(names(data) %in% "Activity")
   activityData <- t(data[actCol])
   dataWithoutActivity <- data[-actCol]
@@ -119,16 +119,19 @@ assignment <- function(){
   mean <- extract(dataSet, meanStr)
   std <- extract(dataSet, stdStr)
   meanstd <- cbind(mean, std)
+
 # 3. Uses descriptive activity names to name the activities in the data set
   actLabel <- readActivity(rP)
+
 # 4. Appropriately labels the data set with descriptive activity names. 
   namedDataSet <- changeActivityToWords(dataSet, actLabel)
 # 5. Creates a second, independent tidy data set with the average of each 
 # variable for each activity and each subject. 
   td <- tidyDataSet(dataSet)
 
-  outputFile <-  file.path(rP, "assignment.txt")
+  outputFile <- file.path("./, "assignment.txt")
   write.table(td, outputFile)
+  td
 }
 
 
