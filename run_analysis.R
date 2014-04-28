@@ -129,7 +129,7 @@ run_analysis <- function(){
 # variable for each activity and each subject. 
   td <- tidyDataSet(dataSet)
 
-  outputFile <- file.path("./",assignment.txt")
+  outputFile <- file.path("./",assignment.txt",row.names=FALSE, col.names=FALSE)
   write.table(td, outputFile)
   td
 }
