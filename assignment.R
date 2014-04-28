@@ -129,7 +129,7 @@ assignment <- function(){
 # variable for each activity and each subject. 
   td <- tidyDataSet(dataSet)
 
-  outputFile <- file.path("./, "assignment.txt")
+  outputFile <- file.path("./",assignment.txt")
   write.table(td, outputFile)
   td
 }
