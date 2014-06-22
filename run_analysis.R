@@ -21,7 +21,7 @@ library(stringr)
 #
 # Arguments
 #
-# rootPath	An input string which indicates the root path
+# rootPath  An input string which indicates the root path
 #
 # Details
 #
@@ -50,7 +50,7 @@ readDataset <- function(rootPath="./UCI HAR Dataset/") {
   yTestData <- read.table(yTestFileName,col.names="Activity")
   testSubjectData <-read.table(testSubjectName, col.names="Subject")
   TestData <- cbind(xTestData,testSubjectData, yTestData)
-
+  
   xTrainData <- read.table(xTrainFileName, col.names=features)
   yTrainData <- read.table(yTrainFileName, col.names="Activity")
   trainSubjectData <-read.table(trainSubjectName, col.names="Subject")
@@ -106,32 +106,30 @@ tidyDataSet<- function(data) {
 }
 
 run_analysis <- function(){
-# Prepare the environment variables
+  # Prepare the environment variables
   rP <- "./UCI HAR Dataset/"
   meanStr <- "\\.mean\\."
   stdStr <- "\\.std\\."
-
-# 1. Merges the training and the test sets to create one data set.
+  
+  # 1. Merges the training and the test sets to create one data set.
   dataSetList <- readDataset(rP)
   dataSet <- mergeDataSet(dataSetList)
-# 2. Extracts only the measurements on the mean and standard deviation 
-# for each measurement. 
+  # 2. Extracts only the measurements on the mean and standard deviation 
+  # for each measurement. 
   mean <- extract(dataSet, meanStr)
   std <- extract(dataSet, stdStr)
   meanstd <- cbind(mean, std)
-
-# 3. Uses descriptive activity names to name the activities in the data set
+  
+  # 3. Uses descriptive activity names to name the activities in the data set
   actLabel <- readActivity(rP)
-
-# 4. Appropriately labels the data set with descriptive activity names. 
+  
+  # 4. Appropriately labels the data set with descriptive activity names. 
   namedDataSet <- changeActivityToWords(dataSet, actLabel)
-# 5. Creates a second, independent tidy data set with the average of each 
-# variable for each activity and each subject. 
+  # 5. Creates a second, independent tidy data set with the average of each 
+  # variable for each activity and each subject. 
   td <- tidyDataSet(dataSet)
-
-  outputFile <- file.path("./",assignment.txt",row.names=FALSE, col.names=FALSE)
-  write.table(td, outputFile)
+  
+  outputFile <- file.path("./assignment.txt")
+  write.table(td, outputFile, row.names=FALSE, col.names=FALSE)
   td
 }
-
-
